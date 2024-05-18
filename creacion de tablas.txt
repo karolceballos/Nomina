@@ -1,0 +1,136 @@
+-- Crear base de datos SAAS_PEOPLE si no existe
+CREATE DATABASE IF NOT EXISTS SAAS_PEOPLE;
+USE SAAS_PEOPLE;
+
+-- Create table PEOPLE if it does not exist
+CREATE TABLE IF NOT EXISTS PEOPLE(
+    ID INT NOT NULL PRIMARY KEY,
+    NAME VARCHAR(50) NOT NULL,
+    LASTNAME VARCHAR(50) NOT NULL,
+    PHONE INT NOT NULL,
+    AGE INT NOT NULL,
+    EMAIL VARCHAR(255) NOT NULL  -- Added email column
+);
+
+-- Insert data into the PEOPLE table
+INSERT INTO PEOPLE (ID, NAME, LASTNAME, PHONE, AGE, EMAIL) VALUES
+(1, 'Juan', 'Pérez', 123456789, 30, 'juan.perez@example.com'),
+(2, 'María', 'González', 987654321, 25, 'maria.gonzalez@example.com'),
+(3, 'Carlos', 'López', 456123789, 40, 'carlos.lopez@example.com'),
+(4, 'Laura', 'Martínez', 789456123, 35, 'laura.martinez@example.com'),
+(5, 'Ana', 'Sánchez', 321654987, 28, 'ana.sanchez@example.com');
+-- Crear base de datos SAAS_ENTERPRISES si no existe
+
+CREATE DATABASE IF NOT EXISTS SAAS_ENTERPRISES;
+USE SAAS_ENTERPRISES;
+
+-- Crear tabla ENTERPRISE si no existe
+CREATE TABLE IF NOT EXISTS ENTERPRISE(
+    NIT INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NAME VARCHAR(255) NOT NULL
+);
+
+-- Insertar datos en la tabla ENTERPRISE
+INSERT INTO ENTERPRISE (NIT, NAME) VALUES
+(1001, 'Empresa A'),
+(1002, 'Empresa B'),
+(1003, 'Empresa C'),
+(1004, 'Empresa D'),
+(1005, 'Empresa E');
+
+-- Crear base de datos SAAS_EMPLOYEES si no existe
+CREATE DATABASE IF NOT EXISTS SAAS_EMPLOYEES;
+USE SAAS_EMPLOYEES;
+
+-- Crear tabla EMPLOYEE si no existe
+CREATE TABLE IF NOT EXISTS EMPLOYEE(
+    ID INT NOT NULL  PRIMARY KEY,
+    SUPERIOR INT,
+    SALARY DOUBLE NOT NULL
+);
+
+-- Insertar datos en la tabla EMPLOYEE
+INSERT INTO EMPLOYEE (ID, SUPERIOR, SALARY) VALUES
+(1, NULL, 5000.00),
+(2, 1, 4000.00),
+(3, 1, 4500.00),
+(4, 2, 3800.00),
+(5, 1, 4700.00);
+
+-- Crear base de datos SAAS_DEPARTMENTS si no existe
+CREATE DATABASE IF NOT EXISTS SAAS_DEPARTMENTS;
+USE SAAS_DEPARTMENTS;
+
+-- Crear tabla DEPARTMENT si no existe
+CREATE TABLE IF NOT EXISTS DEPARTMENT(
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ENTERPRISE INT NOT NULL,
+    NAME VARCHAR(255) NOT NULL
+);
+
+-- Insertar datos en la tabla DEPARTMENT
+INSERT INTO DEPARTMENT (ENTERPRISE, NAME) VALUES
+(1001, 'Departamento A'),
+(1002, 'Departamento B'),
+(1003, 'Departamento C'),
+(1004, 'Departamento D'),
+(1005, 'Departamento E');
+
+-- Crear base de datos SAAS_JOBS si no existe
+CREATE DATABASE IF NOT EXISTS SAAS_JOBS;
+USE SAAS_JOBS;
+
+-- Crear tabla JOB si no existe
+CREATE TABLE IF NOT EXISTS JOB(
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    DEPARTMENT INT NOT NULL,
+    DESCRIPTION VARCHAR(255)
+);
+
+-- Insertar datos en la tabla JOB
+INSERT INTO JOB (DEPARTMENT, DESCRIPTION) VALUES
+(1, 'Desarrollador'),
+(2, 'Diseñador'),
+(3, 'Gerente'),
+(4, 'Analista'),
+(5, 'Consultor');
+
+CREATE DATABASE IF NOT EXISTS SAAS_CONTRACTS;
+USE SAAS_CONTRACTS;
+
+-- Crear tabla CONTRACT si no existe
+CREATE TABLE IF NOT EXISTS CONTRACT(
+    ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    EMPLOYEE_ID INT NOT NULL,
+    NIT INT NOT NULL,
+    JOB_ID INT NOT NULL,
+    ENTRY_DATE DATE NOT NULL  -- Agregado para coincidir con la clase Java
+);
+
+-- Insertar datos en la tabla CONTRACT
+-- Nota: Los valores para ENTRY_DATE deben ser agregados aquí, ejemplos de fechas son añadidos arbitrariamente
+INSERT INTO CONTRACT (EMPLOYEE_ID, NIT, JOB_ID, ENTRY_DATE) VALUES
+(1, 1001, 1, '2023-01-01'),               
+(2, 1002, 2, '2023-01-02'), 
+(3, 1003, 3, '2023-01-03'),
+(4, 1004, 4, '2023-01-04'),
+(5, 1005, 5, '2023-01-05');
+
+
+CREATE DATABASE IF NOT EXISTS SAAS_EVENT_TYPES;
+USE SAAS_EVENT_TYPES;
+CREATE TABLE IF NOT EXISTS EVENT_TYPE(
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    DESCRIPTION VARCHAR(255) NOT NULL
+);
+
+
+CREATE DATABASE IF NOT EXISTS SAAS_EVENTS;
+USE SAAS_EVENTS;
+
+CREATE TABLE IF NOT EXISTS EVENTS (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    EMPLOYEE INT NOT NULL,
+    TYPE INT NOT NULL,
+    EVENT_DATE DATE NOT NULL
+);
