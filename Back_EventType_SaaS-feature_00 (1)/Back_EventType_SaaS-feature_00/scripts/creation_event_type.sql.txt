@@ -1,0 +1,18 @@
+-- Crear base de datos SAAS_EVENT_TYPES si no existe
+CREATE DATABASE IF NOT EXISTS SAAS_EVENT_TYPES;
+USE SAAS_EVENT_TYPES;
+
+-- Crear tabla EVENT_TYPE si no existe
+CREATE TABLE IF NOT EXISTS EVENT_TYPE(
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    DESCRIPTION VARCHAR(255),
+    STATUS VARCHAR(255)
+);
+
+-- Insertar datos en la tabla EVENT_TYPE
+INSERT INTO EVENT_TYPE (DESCRIPTION, STATUS) VALUES
+('Reunión', 'Progresando'),
+('Conferencia', 'Completado'),
+('Seminario', 'Inactivo'),
+('Capacitación', 'Completado'),
+('Planning', 'Cancelado');
